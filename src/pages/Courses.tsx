@@ -14,18 +14,25 @@ interface Course {
 
 const courses: Course[] = [
   {
-    id: "self-defense",
-    title: "Self Defense Basics",
-    description: "Learn fundamental self-defense techniques suitable for beginners.",
+    id: "girls-defense",
+    title: "Girls Specific Defense",
+    description: "Learn specialized self-defense techniques designed specifically for women's safety and empowerment.",
     price: 199,
     thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
   },
   {
-    id: "advanced-combat",
-    title: "Advanced Combat",
-    description: "Master advanced fighting techniques and strategies.",
+    id: "street-defense",
+    title: "Street Fight Defense",
+    description: "Master practical techniques for real-world street situations and conflict avoidance.",
+    price: 199,
+    thumbnail: "https://images.unsplash.com/photo-1581092162384-8987c1d64718",
+  },
+  {
+    id: "pro-mentoring",
+    title: "Professional Fight Mentoring",
+    description: "Get personalized live mentoring from professional fighters and martial arts experts.",
     price: 1999,
-    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+    thumbnail: "https://images.unsplash.com/photo-1581092877018-dac6a371d50f",
   },
 ];
 
@@ -117,7 +124,7 @@ const Courses = () => {
                 <p className="text-gray-300 mb-4">{course.description}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-martial-red font-bold">
-                    ₹{course.price}/month
+                    ₹{course.price}{course.price === 199 ? "/lifetime" : "/month"}
                   </span>
                   <Button
                     onClick={() => handlePayment(course)}

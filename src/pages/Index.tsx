@@ -8,9 +8,18 @@ const Index = () => {
       <Navigation />
       
       <main className="animate-fade-in">
-        {/* Hero Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center">
+        {/* Hero Section with Background Image */}
+        <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="absolute inset-0 z-0">
+            <img
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+              alt="Self Defense"
+              className="w-full h-full object-cover opacity-20"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-martial-dark/80 to-black"></div>
+          </div>
+          
+          <div className="relative z-10 text-center">
             <h1 className="text-4xl sm:text-6xl font-bold mb-6">
               Master the Art of Self-Defense
             </h1>
@@ -27,10 +36,17 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* Features Section with Images */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6">
+              <div className="mb-4 relative h-48 rounded-lg overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f"
+                  alt="Self Defense Training"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <Shield className="w-12 h-12 mx-auto mb-4 text-martial-red" />
               <h3 className="text-xl font-semibold mb-2">Self Defense</h3>
               <p className="text-gray-300">
@@ -38,6 +54,13 @@ const Index = () => {
               </p>
             </div>
             <div className="text-center p-6">
+              <div className="mb-4 relative h-48 rounded-lg overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1581091877018-dac6a371d50f"
+                  alt="Expert Instruction"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <Users className="w-12 h-12 mx-auto mb-4 text-martial-red" />
               <h3 className="text-xl font-semibold mb-2">Expert Instructors</h3>
               <p className="text-gray-300">
@@ -45,6 +68,13 @@ const Index = () => {
               </p>
             </div>
             <div className="text-center p-6">
+              <div className="mb-4 relative h-48 rounded-lg overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1581092162384-8987c1d64718"
+                  alt="Structured Learning"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <Target className="w-12 h-12 mx-auto mb-4 text-martial-red" />
               <h3 className="text-xl font-semibold mb-2">Structured Learning</h3>
               <p className="text-gray-300">
