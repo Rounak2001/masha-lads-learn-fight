@@ -28,12 +28,26 @@ const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1581092162384-8987c1d64718",
   },
   {
-    id: "pro-mentoring",
-    title: "Professional Fight Mentoring",
-    description: "Get personalized live mentoring from professional fighters and martial arts experts.",
-    price: 1999,
-    thumbnail: "https://images.unsplash.com/photo-1581092877018-dac6a371d50f",
+    id: "basic-defense",
+    title: "Basic Self Defense",
+    description: "Learn fundamental self-defense techniques and build a strong foundation in martial arts.",
+    price: 199,
+    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
   },
+  {
+    id: "weapon-defense",
+    title: "Weapon Defense Techniques",
+    description: "Learn how to defend against common weapons and stay safe in threatening situations.",
+    price: 199,
+    thumbnail: "https://images.unsplash.com/photo-1581092160607-ee22621dd758",
+  },
+  {
+    id: "fitness-combat",
+    title: "Combat Fitness",
+    description: "Combine martial arts with fitness training for a complete body and mind workout.",
+    price: 199,
+    thumbnail: "https://images.unsplash.com/photo-1581092160562-6087ddc18fb9",
+  }
 ];
 
 const Courses = () => {
@@ -48,7 +62,7 @@ const Courses = () => {
         amount: course.price * 100, // Amount in paise
         currency: "INR",
         name: "MashaLads",
-        description: `Enrollment for ${course.title}`,
+        description: "Access to All Self Defense Courses",
         handler: function (response: any) {
           console.log("Payment successful:", response);
           handleSuccessfulPayment(course, response.razorpay_payment_id);
@@ -77,15 +91,14 @@ const Courses = () => {
   const handleSuccessfulPayment = (course: Course, paymentId: string) => {
     // Handle successful payment and referral
     if (referralCode) {
-      // Calculate referral commission (₹99 for ₹199 course)
-      const commission = course.price === 199 ? 99 : 0;
+      const commission = 99; // Fixed commission for all courses
       console.log("Processing referral commission:", commission);
       // Here you would typically make an API call to credit the referrer
     }
 
     toast({
       title: "Enrollment Successful!",
-      description: `You have successfully enrolled in ${course.title}`,
+      description: "You now have access to all our self-defense courses!",
     });
   };
 
@@ -95,8 +108,12 @@ const Courses = () => {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-white mb-8">Our Courses</h1>
         
-        {/* Referral Code Input */}
         <div className="mb-8">
+          <div className="bg-martial-red/10 p-4 rounded-lg mb-6">
+            <p className="text-white text-lg">
+              <span className="font-bold">Special Offer:</span> Get access to ALL courses for just ₹199/lifetime!
+            </p>
+          </div>
           <input
             type="text"
             placeholder="Enter Referral Code (Optional)"
@@ -106,7 +123,6 @@ const Courses = () => {
           />
         </div>
 
-        {/* Course Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
             <Card key={course.id} className="bg-martial-dark border-martial-red">
@@ -124,7 +140,7 @@ const Courses = () => {
                 <p className="text-gray-300 mb-4">{course.description}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-martial-red font-bold">
-                    ₹{course.price}{course.price === 199 ? "/lifetime" : "/month"}
+                    Included in ₹199 package
                   </span>
                   <Button
                     onClick={() => handlePayment(course)}
