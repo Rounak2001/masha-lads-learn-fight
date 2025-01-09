@@ -3,8 +3,42 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Navigation from "@/components/Navigation";
+import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { toast } from "@/components/ui/use-toast";
 
 const Login = () => {
+  const supabase = useSupabaseClient();
+  const session = useSession();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (session) {
+      navigate('/courses');
+    }
+  }, [session, navigate]);
+
+  const handleGoogleLogin = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/courses`
+        }
+      });
+      
+      if (error) throw error;
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Login Failed",
+        description: "There was an error logging in with Google",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div>
       <Navigation />
@@ -14,23 +48,13 @@ const Login = () => {
             <CardTitle className="text-2xl text-white">Welcome Back</CardTitle>
             <CardDescription className="text-gray-300">Login to access your courses</CardDescription>
           </CardHeader>
-          <CardContent>
-            <form className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-white">Email</Label>
-                <Input id="email" type="email" placeholder="Enter your email" className="bg-martial-dark text-white" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-white">Password</Label>
-                <Input id="password" type="password" placeholder="Enter your password" className="bg-martial-dark text-white" />
-              </div>
-              <Button type="submit" className="w-full bg-martial-red hover:bg-martial-red/90">
-                Sign In
-              </Button>
-              <div className="text-center">
-                <a href="#" className="text-martial-red hover:underline text-sm">Forgot password?</a>
-              </div>
-            </form>
+          <CardContent className="space-y-4">
+            <Button 
+              onClick={handleGoogleLogin}
+              className="w-full bg-white hover:bg-gray-100 text-black"
+            >
+              Continue with Google
+            </Button>
           </CardContent>
         </Card>
       </div>
